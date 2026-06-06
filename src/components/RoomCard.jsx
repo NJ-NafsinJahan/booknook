@@ -1,5 +1,6 @@
 import { Button } from "@heroui/react";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { BsPeople, BsStack } from "react-icons/bs";
 import { HiUsers } from "react-icons/hi";
@@ -76,9 +77,11 @@ const RoomCard = ({ room }) => {
         </div>
 
         {/* Button */}
-        <button className="w-full mt-3 py-2.5 rounded-lg text-white font-medium bg-linear-to-r from-pink-500 via-fuchsia-500 to-purple-600 hover:opacity-90 transition-all">
-          View Details
-        </button>
+        <Link href={`/rooms/${_id}`}>
+          <button className="w-full mt-3 py-2.5 rounded-lg text-white font-medium bg-linear-to-r from-pink-500 via-fuchsia-500 to-purple-600 hover:opacity-90 transition-all">
+            View Details
+          </button>
+        </Link>
       </div>
     </div>
   );

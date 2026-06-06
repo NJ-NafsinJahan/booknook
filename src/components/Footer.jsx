@@ -28,19 +28,25 @@ export default function Footer() {
 
             <ul className="space-y-3 text-gray-300">
               <li>
-                <Link href="/" className="hover:text-[#FF4D6D] transition">
+                <Link href="/" className="hover:text-fuchsia-500 transition">
                   Home
                 </Link>
               </li>
 
               <li>
-                <Link href="/rooms" className="hover:text-[#FF4D6D] transition">
+                <Link
+                  href="/rooms"
+                  className="hover:text-fuchsia-500 transition"
+                >
                   Rooms
                 </Link>
               </li>
 
               <li>
-                <Link href="/about" className="hover:text-[#FF4D6D] transition">
+                <Link
+                  href="/about"
+                  className="hover:text-fuchsia-500 transition"
+                >
                   About
                 </Link>
               </li>

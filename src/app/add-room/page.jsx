@@ -74,7 +74,7 @@ export default function AddRoomPage() {
           required
           value={room.roomName}
           onChange={handleChange}
-          className="w-full p-3 border rounded-md dark:bg-gray-800"
+          className="w-full p-3 border rounded-md bg-gray-800"
         />
 
         {/* Description */}
@@ -84,7 +84,7 @@ export default function AddRoomPage() {
           required
           value={room.description}
           onChange={handleChange}
-          className="w-full p-3 border rounded-md dark:bg-gray-800"
+          className="w-full p-3 border rounded-md bg-gray-800"
         />
 
         {/* Image URL */}
@@ -94,7 +94,7 @@ export default function AddRoomPage() {
           placeholder="Image URL"
           value={room.image}
           onChange={handleChange}
-          className="w-full p-3 border rounded-md dark:bg-gray-800"
+          className="w-full p-3 border rounded-md bg-gray-800"
         />
 
         {/* Floor */}
@@ -104,7 +104,7 @@ export default function AddRoomPage() {
           placeholder="Floor (e.g. 3rd Floor)"
           value={room.floor}
           onChange={handleChange}
-          className="w-full p-3 border rounded-md dark:bg-gray-800"
+          className="w-full p-3 border rounded-md bg-gray-800"
         />
 
         {/* Capacity + Rate */}
@@ -115,7 +115,7 @@ export default function AddRoomPage() {
             placeholder="Capacity"
             value={room.capacity}
             onChange={handleChange}
-            className="w-full p-3 border rounded-md dark:bg-gray-800"
+            className="w-full p-3 border rounded-md bg-gray-800"
           />
 
           <input
@@ -124,7 +124,7 @@ export default function AddRoomPage() {
             placeholder="Hourly Rate ($)"
             value={room.hourlyRate}
             onChange={handleChange}
-            className="w-full p-3 border rounded-md dark:bg-gray-800"
+            className="w-full p-3 border rounded-md bg-gray-800"
           />
         </div>
 
@@ -149,7 +149,7 @@ export default function AddRoomPage() {
         {/* Submit btn*/}
         <button
           type="submit"
-          className="w-full py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
+          className="w-full py-3  bg-linear-to-r from-pink-500 via-fuchsia-500 to-purple-600 text-white rounded-md hover:opacity-80 transition"
         >
           Submit Room
         </button>
