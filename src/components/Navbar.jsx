@@ -3,28 +3,40 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
+import { FaDoorOpen } from "react-icons/fa6";
 import { FiMenu, FiX } from "react-icons/fi";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="w-full  h-16 px-6 flex items-center justify-between shadow-md bg-white relative z-50">
+    <nav className="w-full bg-[#1E103F]  h-16 px-6 flex items-center justify-between shadow-md relative z-50">
       {/* Logo Container */}
 
       <div className="flex items-center h-full">
-        <Image
+        <div className="flex items-center">
+          <Link href="/" className="flex items-center gap-2 group">
+            <div className="p-2 bg-linear-to-r from-pink-500 via-fuchsia-500 to-purple-600  rounded-xl group-hover:rotate-12 transition-transform">
+              {/* <MapPinHouse className="w-6 h-6 font-bold text-white " /> */}
+              <FaDoorOpen className="w-6 h-6 font-bold text-white " />
+            </div>
+            <span className="font-extrabold text-2xl bg-linear-to-r from-pink-500 via-fuchsia-500 to-purple-600  bg-clip-text text-transparent">
+              BooKnooK
+            </span>
+          </Link>
+        </div>
+        {/* <Image
           src={"/assets/logo.png"}
           alt="logo"
           width={200}
           height={80}
           priority
           className="h-auto w-24 sm:w-28 md:w-32 lg:w-36 object-contain drop-shadow-sm"
-        />
+        /> */}
       </div>
 
       {/* Desktop Menu */}
-      <ul className="hidden md:flex items-center gap-6 text-gray-700 font-medium">
+      <ul className="hidden md:flex items-center gap-6 text-white font-medium">
         <li>
           <Link href="/">Home</Link>
         </li>
@@ -43,7 +55,7 @@ const Navbar = () => {
       </ul>
 
       {/* Right Side */}
-      <ul className="hidden  md:flex items-center gap-5 text-gray-700 font-medium">
+      <ul className="hidden  md:flex items-center gap-5 text-white font-medium">
         <li>
           <Link href="/profile">Profile</Link>
         </li>

@@ -14,7 +14,11 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${josefinSans.className}  h-full antialiased`}>
+    <html
+      lang="en"
+      data-theme="dark"
+      className={`${josefinSans.className}  h-full antialiased`}
+    >
       <body className="min-h-full flex flex-col">
         <Navbar></Navbar>
         <main>{children}</main>
