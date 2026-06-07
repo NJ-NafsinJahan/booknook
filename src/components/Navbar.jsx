@@ -1,11 +1,15 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
 import React, { useState } from "react";
 import { FaDoorOpen } from "react-icons/fa6";
 import { FiMenu, FiX } from "react-icons/fi";
 
 const Navbar = () => {
+  const { data: session } = authClient.useSession();
+  console.log(session, "From Navbar");
+
   const [open, setOpen] = useState(false);
 
   return (
@@ -70,7 +74,7 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {open && (
-        <div className="absolute top-16 left-0 w-full bg-white shadow-lg flex flex-col items-start gap-4 p-6 md:hidden z-50">
+        <div className="absolute top-16 left-0 w-full bg-[#3a2765]  shadow-lg flex flex-col items-start gap-4 p-6 md:hidden z-50">
           <Link href="/" onClick={() => setOpen(false)}>
             Home
           </Link>

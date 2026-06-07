@@ -14,26 +14,27 @@ import {
 import { redirect } from "next/navigation";
 import React from "react";
 
-const RegisterPage = () => {
+const LogInPage = () => {
   // Submit
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const user = Object.fromEntries(formData.entries());
-    console.log(user, "user Data from register");
+    console.log(user, "user Data from LogIn");
 
-    //   for signUp/Register
-    const { data, error } = await authClient.signUp.email({
-      email: user.email,
-      password: user.password,
-      name: user.name,
-      image: user.image,
+    //   for signin/Login
+    const { data, error } = await authClient.signIn.email({
+      email: user?.email,
+      password: user?.password,
     });
-    console.log(data, error, "form Register page");
+    console.log(data, error, "form Login page");
 
-    if (data) {
-      redirect("/login");
-    }
+    // if (data) {
+    //   redirect("/");
+    // }
+    // if (error) {
+    //   alert("Error");
+    // }
   };
 
   return (
@@ -42,34 +43,20 @@ const RegisterPage = () => {
         {/* Header */}
         <div className="flex flex-col items-center text-center py-2 px-2">
           <h1 className="text-xl sm:text-2xl md:text-3xl font-bold">
-            Join{" "}
             <span className="font-extrabold bg-linear-to-r from-pink-500 via-fuchsia-500 to-purple-600 bg-clip-text text-transparent">
-              BooKnooK!
-            </span>
+              Welcome
+            </span>{" "}
+            Back !
           </h1>
 
           <p className="text-sm sm:text-base text-gray-300 mt-2">
-            Create your account to start
+            Your next productive session starts here.
           </p>
         </div>
 
         {/* Form */}
         <Card className="bg-transparent shadow-none px-6 pb-8">
           <Form onSubmit={onSubmit} className="flex flex-col gap-5 w-full">
-            {/* Name */}
-            <TextField isRequired name="name" type="text">
-              <Label>Name</Label>
-              <Input className="w-full" placeholder="Your Name" />
-              <FieldError />
-            </TextField>
-
-            {/* Image */}
-            <TextField isRequired name="image" type="url">
-              <Label>Image URL</Label>
-              <Input className="w-full" placeholder="Image URL" />
-              <FieldError />
-            </TextField>
-
             {/* Email */}
             <TextField
               isRequired
@@ -120,7 +107,7 @@ const RegisterPage = () => {
                 type="submit"
                 className="w-full py-3 rounded-lg font-semibold bg-linear-to-r from-pink-500 via-fuchsia-500 to-purple-600 hover:opacity-90 transition"
               >
-                Register
+                LogIn
               </Button>
             </div>
           </Form>
@@ -130,4 +117,4 @@ const RegisterPage = () => {
   );
 };
 
-export default RegisterPage;
+export default LogInPage;
