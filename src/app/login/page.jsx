@@ -2,6 +2,7 @@
 
 import { authClient } from "@/lib/auth-client";
 import { Card } from "@heroui/react";
+import { toast } from "react-toastify";
 import {
   Button,
   Description,
@@ -29,12 +30,14 @@ const LogInPage = () => {
     });
     console.log(data, error, "form Login page");
 
-    // if (data) {
-    //   redirect("/");
-    // }
-    // if (error) {
-    //   alert("Error");
-    // }
+    if (data) {
+      toast.success("LogIn successfully!");
+      redirect("/");
+    }
+
+    if (error) {
+      toast.error("Something went wrong!");
+    }
   };
 
   return (

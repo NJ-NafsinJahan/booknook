@@ -32,7 +32,11 @@ const RegisterPage = () => {
     console.log(data, error, "form Register page");
 
     if (data) {
-      redirect("/login");
+      toast.success("Registration successful ! Please LogIn");
+      redirect("/");
+    }
+    if (error) {
+      toast.error(error.message || "Registration failed");
     }
   };
 
