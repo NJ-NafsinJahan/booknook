@@ -7,6 +7,7 @@ import { FaEdit } from "react-icons/fa";
 
 export function EditModal({ room }) {
   const [formData, setFormData] = useState({
+    // _id: room?._id || "",
     roomName: room?.roomName || "",
     description: room?.description || "",
     image: room?.image || "",
@@ -49,18 +50,18 @@ export function EditModal({ room }) {
     e.preventDefault();
     console.log(formData, "form DAta");
 
-    // const res = await fetch("http://localhost:5000/room", {
-    //   method: "POST",
-    //   headers: {
-    //     "content-type": "application/json",
-    //   },
-    //   body: JSON.stringify(room),
-    // });
+    const res = await fetch(`http://localhost:5000/room/${room?._id}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
 
-    // const data = await res.json();
-    // console.log(data);
+    const data = await res.json();
+    console.log(data, "Updated patch data");
 
-    // alert("Room submitted!");
+    alert("Room Details Updated!");
   };
 
   return (
