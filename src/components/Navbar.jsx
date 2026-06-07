@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 import { FaDoorOpen } from "react-icons/fa6";
@@ -25,14 +24,6 @@ const Navbar = () => {
             </span>
           </Link>
         </div>
-        {/* <Image
-          src={"/assets/logo.png"}
-          alt="logo"
-          width={200}
-          height={80}
-          priority
-          className="h-auto w-24 sm:w-28 md:w-32 lg:w-36 object-contain drop-shadow-sm"
-        /> */}
       </div>
 
       {/* Desktop Menu */}
