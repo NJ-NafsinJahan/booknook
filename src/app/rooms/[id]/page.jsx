@@ -5,6 +5,7 @@ import { BsStack } from "react-icons/bs";
 import { FaEdit } from "react-icons/fa";
 import { HiUsers } from "react-icons/hi";
 import { EditModal } from "@/components/EditModal";
+import { DeleteAlert } from "@/components/DeleteAlert";
 
 const RoomDetailsPage = async ({ params }) => {
   const { id } = await params;
@@ -84,7 +85,10 @@ const RoomDetailsPage = async ({ params }) => {
           </div>
 
           {/* Button */}
-          <EditModal room={room}></EditModal>
+          <div className=" gap-5 flex justify-center items-center">
+            <EditModal room={room}></EditModal>
+            <DeleteAlert room={room}></DeleteAlert>
+          </div>
           {/* <Button className="w-full mt-4 py-3  rounded-lg text-white font-medium bg-linear-to-r from-pink-500 via-fuchsia-500 to-purple-600 hover:opacity-80 transition flex justify-center items-center gap-3">
             <FaEdit className="text-lg" /> Edit Details
           </Button> */}

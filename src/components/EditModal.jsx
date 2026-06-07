@@ -66,7 +66,7 @@ export function EditModal({ room }) {
 
   return (
     <Modal>
-      <Button className="w-full mt-4 py-3  rounded-lg text-white font-medium bg-linear-to-r from-pink-500 via-fuchsia-500 to-purple-600 hover:opacity-80 transition flex justify-center items-center gap-3">
+      <Button className="w-full mt-4 mb-4 py-3  rounded-lg text-white font-medium bg-linear-to-r from-pink-500 via-fuchsia-500 to-purple-600 hover:opacity-80 transition flex justify-center items-center gap-3">
         <FaEdit className="text-lg" /> Edit Details
       </Button>
       <Modal.Backdrop>

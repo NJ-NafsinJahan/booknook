@@ -1,5 +1,6 @@
 "use client";
 
+import { redirect } from "next/navigation";
 import { useState } from "react";
 
 export default function AddRoomPage() {
@@ -56,6 +57,7 @@ export default function AddRoomPage() {
     });
 
     const data = await res.json();
+    redirect("/rooms");
     console.log(data);
 
     alert("Room submitted!");
