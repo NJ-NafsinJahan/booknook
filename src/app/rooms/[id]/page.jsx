@@ -6,6 +6,7 @@ import { FaEdit } from "react-icons/fa";
 import { HiUsers } from "react-icons/hi";
 import { EditModal } from "@/components/EditModal";
 import { DeleteAlert } from "@/components/DeleteAlert";
+import BookingCard from "@/components/BookingCard";
 
 const RoomDetailsPage = async ({ params }) => {
   const { id } = await params;
@@ -31,6 +32,7 @@ const RoomDetailsPage = async ({ params }) => {
         Room Details
       </h1>
 
+      {/* Room Details */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 bg-[#1E103F] shadow-lg rounded-2xl overflow-hidden border border-gray-800">
         {/* Image */}
         <div className="relative w-full h-64 sm:h-80 lg:h-full min-h-80">
@@ -94,6 +96,9 @@ const RoomDetailsPage = async ({ params }) => {
           </Button> */}
         </div>
       </div>
+
+      {/* Booking Card */}
+      <BookingCard room={room}></BookingCard>
     </div>
   );
 };
