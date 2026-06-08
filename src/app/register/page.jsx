@@ -1,7 +1,7 @@
 "use client";
 
 import { authClient } from "@/lib/auth-client";
-import { Card } from "@heroui/react";
+import { Card, Separator } from "@heroui/react";
 import {
   Button,
   Description,
@@ -13,6 +13,8 @@ import {
 } from "@heroui/react";
 import { redirect } from "next/navigation";
 import React from "react";
+import { FcGoogle } from "react-icons/fc";
+import Link from "next/link";
 
 const RegisterPage = () => {
   // Submit
@@ -38,6 +40,13 @@ const RegisterPage = () => {
     if (error) {
       toast.error(error.message || "Registration failed");
     }
+  };
+
+  //   Google Register / signup
+  const handleGoogleRegister = async () => {
+    await authClient.signIn.social({
+      provider: "google",
+    });
   };
 
   return (
@@ -128,6 +137,42 @@ const RegisterPage = () => {
               </Button>
             </div>
           </Form>
+
+          {/* Or */}
+          <div className="flex items-center gap-3 w-full my-3">
+            <Separator className="flex-1 bg-fuchsia-800" />
+
+            <span className="text-sm text-gray-400 whitespace-nowrap">
+              Or Register with Google
+            </span>
+
+            <Separator className="flex-1 bg-fuchsia-800" />
+          </div>
+
+          {/* Google signIn */}
+          <div className="">
+            <Button
+              onClick={handleGoogleRegister}
+              className={
+                "w-full rounded-lg bg-transparent border border-fuchsia-700 hover:border-fuchsia-500 transition-all duration-300"
+              }
+            >
+              {" "}
+              <FcGoogle />
+              Register with Google
+            </Button>
+            <div className="text-center pt-2 mt-3">
+              <p className="text-xs text-slate-500 font-medium">
+                Already have an account?{" "}
+                <Link
+                  href="/login"
+                  className="text-fuchsia-500 text-[18px] hover:underline underline-offset-4 transition-all"
+                >
+                  Login
+                </Link>
+              </p>
+            </div>
+          </div>
         </Card>
       </div>
     </div>

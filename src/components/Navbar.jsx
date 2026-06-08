@@ -5,10 +5,18 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { FaDoorOpen } from "react-icons/fa6";
 import { FiMenu, FiX } from "react-icons/fi";
+import { Avatar, Button } from "@heroui/react";
 
 const Navbar = () => {
   const { data: session } = authClient.useSession();
-  console.log(session, "From Navbar");
+  const user = session?.user;
+
+  console.log(user, " user From Navbar");
+  console.log(session, " session From Navbar");
+
+  const handleSignOut = async () => {
+    await authClient.signOut();
+  };
 
   const [open, setOpen] = useState(false);
 
@@ -32,39 +40,78 @@ const Navbar = () => {
 
       {/* Desktop Menu */}
       <ul className="hidden md:flex items-center gap-6 text-white font-medium">
-        <li>
-          <Link href="/">Home</Link>
-        </li>
-        <li>
-          <Link href="/rooms">Rooms</Link>
-        </li>
-        <li>
-          <Link href="/my-bookings">My Bookings</Link>
-        </li>
-        <li>
-          <Link href="/add-room">Add Room</Link>
-        </li>
-        <li>
-          <Link href="/my-listings">My Listings</Link>
-        </li>
+        {/* ********** */}
+        {user ? (
+          <>
+            <li>
+              <Link href="/">Home</Link>
+            </li>
+            <li>
+              <Link href="/rooms">Rooms</Link>
+            </li>
+            <li>
+              <Link href="/my-bookings">My Bookings</Link>
+            </li>
+            <li>
+              <Link href="/add-room">Add Room</Link>
+            </li>
+            <li>
+              <Link href="/my-listings">My Listings</Link>
+            </li>
+          </>
+        ) : (
+          <>
+            <li>
+              <Link href="/">Home</Link>
+            </li>
+            <li>
+              <Link href="/rooms">Rooms</Link>
+            </li>
+          </>
+        )}
       </ul>
 
       {/* Right Side */}
       <ul className="hidden  md:flex items-center gap-5 text-white font-medium">
-        <li>
+        {/* <li>
           <Link href="/profile">Profile</Link>
-        </li>
-        <li>
-          <Link href="/login">Login</Link>
-        </li>
-        <li>
-          <Link
-            href="/register"
-            className="px-4 py-2 bg-linear-to-r from-pink-500 via-fuchsia-500 to-purple-600  text-white rounded-lg hover:opacity-90"
-          >
-            Register
-          </Link>
-        </li>
+        </li> */}
+
+        {user ? (
+          <>
+            <li>
+              <Avatar>
+                <Avatar.Image
+                  referrerPolicy="no-referrer"
+                  alt="John Doe"
+                  src={user?.image}
+                />
+                <Avatar.Fallback>{user.name.charAt(0)}</Avatar.Fallback>
+              </Avatar>
+              <Link href="/profile">Profile</Link>
+            </li>
+            <li>
+              <Button onClick={handleSignOut} variant="danger">
+                {" "}
+                LogOut
+              </Button>
+            </li>
+          </>
+        ) : (
+          <>
+            <li>
+              <Link href="/login">Login</Link>
+            </li>
+            <li>
+              <Link
+                href="/register"
+                className="px-4 py-2 bg-linear-to-r from-pink-500 via-fuchsia-500 to-purple-600  text-white rounded-lg hover:opacity-90"
+              >
+                Register
+              </Link>
+            </li>
+          </>
+        )}
       </ul>
 
       {/* Mobile Button */}
@@ -93,20 +140,50 @@ const Navbar = () => {
 
           <hr className="w-full" />
 
-          <Link href="/profile" onClick={() => setOpen(false)}>
+          {/* <Link href="/profile" onClick={() => setOpen(false)}>
             Profile
-          </Link>
-          <Link href="/login" onClick={() => setOpen(false)}>
-            Login
-          </Link>
+          </Link> */}
 
-          <Link
-            href="/register"
-            onClick={() => setOpen(false)}
-            className="px-4 py-2 bg-linear-to-r from-pink-500 to-purple-600 text-white rounded-lg inline-block w-full text-center"
-          >
-            Register
-          </Link>
+          {user ? (
+            <>
+              <li>
+                <Avatar>
+                  <Avatar.Image
+                    referrerPolicy="no-referrer"
+                    alt="John Doe"
+                    src={user?.image}
+                  />
+                  <Avatar.Fallback>{user.name.charAt(0)}</Avatar.Fallback>
+                </Avatar>
+                <Link href="/profile">Profile</Link>
+              </li>
+              <li>
+                <Button
+                  variant="danger"
+                  onClick={() => {
+                    handleSignOut();
+                    setOpen(false);
+                  }}
+                >
+                  LogOut
+                </Button>
+              </li>
+            </>
+          ) : (
+            <>
+              <Link href="/login" onClick={() => setOpen(false)}>
+                Login
+              </Link>
+
+              <Link
+                href="/register"
+                onClick={() => setOpen(false)}
+                className="px-4 py-2 bg-linear-to-r from-pink-500 to-purple-600 text-white rounded-lg inline-block w-full text-center"
+              >
+                Register
+              </Link>
+            </>
+          )}
         </div>
       )}
     </nav>

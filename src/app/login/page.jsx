@@ -1,7 +1,7 @@
 "use client";
 
 import { authClient } from "@/lib/auth-client";
-import { Card } from "@heroui/react";
+import { Card, Separator } from "@heroui/react";
 import { toast } from "react-toastify";
 import {
   Button,
@@ -14,6 +14,8 @@ import {
 } from "@heroui/react";
 import { redirect } from "next/navigation";
 import React from "react";
+import { FcGoogle } from "react-icons/fc";
+import Link from "next/link";
 
 const LogInPage = () => {
   // Submit
@@ -38,6 +40,13 @@ const LogInPage = () => {
     if (error) {
       toast.error("Something went wrong!");
     }
+  };
+
+  //   Google Login
+  const handleGoogleLogin = async () => {
+    await authClient.signIn.social({
+      provider: "google",
+    });
   };
 
   return (
@@ -114,6 +123,31 @@ const LogInPage = () => {
               </Button>
             </div>
           </Form>
+
+          {/* Or */}
+          <div className="flex items-center gap-3 w-full my-3">
+            <Separator className="flex-1 bg-fuchsia-800" />
+
+            <span className="text-sm text-gray-400 whitespace-nowrap">
+              Or Register with Google
+            </span>
+
+            <Separator className="flex-1 bg-fuchsia-800" />
+          </div>
+
+          {/* Google signIn */}
+          <div className="">
+            <Button
+              onClick={handleGoogleLogin}
+              className={
+                "w-full rounded-lg bg-transparent border border-fuchsia-700 hover:border-fuchsia-500 transition-all duration-300"
+              }
+            >
+              {" "}
+              <FcGoogle />
+              LogIn with Google
+            </Button>
+          </div>
         </Card>
       </div>
     </div>
