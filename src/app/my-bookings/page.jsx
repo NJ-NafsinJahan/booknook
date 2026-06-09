@@ -1,3 +1,4 @@
+import { BookingCancelAlert } from "@/components/BookingCancelAlart";
 import { auth } from "@/lib/auth";
 import { Button, Separator } from "@heroui/react";
 import { Badge } from "@heroui/react";
@@ -88,9 +89,11 @@ const MyBookingsPage = async () => {
               </p>
 
               {/* Cancel Button */}
-              <button className="w-full mt-2 bg-red-500 hover:bg-red-600 text-white text-md py-2 rounded-lg transition">
+              {/* <Button className="w-full mt-2 bg-red-500 hover:bg-red-600 text-white text-md py-2 rounded-lg transition">
                 Cancel Booking
-              </button>
+              </Button> */}
+
+              <BookingCancelAlert booking={booking}></BookingCancelAlert>
             </div>
           </div>
         ))}
