@@ -15,7 +15,7 @@ const BookingCard = ({ room }) => {
   const { data: session } = authClient.useSession();
   const user = session?.user;
 
-  console.log(user, "booking card");
+  //   console.log(user, "booking card");
 
   console.log(room);
   const { _id, roomName, hourlyRate, image } = room;
@@ -27,21 +27,20 @@ const BookingCard = ({ room }) => {
   const [startTime, setStartTime] = useState(null);
   const [endTime, setEndTime] = useState(null);
 
-  const calculateTotalPrice = () => {
-    if (!startTime || !endTime) return hourlyRate;
+  const getTotalHours = () => {
+    if (!startTime || !endTime) return 0;
 
     const startHour = startTime.hour;
     const endHour = endTime.hour;
 
     const totalHours = endHour - startHour;
-    console.log(totalHours, "total hours");
 
-    if (totalHours <= 0) return 0;
-    const totalCost = totalHours * hourlyRate;
+    return totalHours > 0 ? totalHours : 0;
+  };
 
-    console.log(totalCost, "total price");
-
-    return totalCost;
+  const calculateTotalPrice = () => {
+    const hours = getTotalHours();
+    return hours * hourlyRate;
   };
 
   //   Confirm Booking
@@ -59,6 +58,9 @@ const BookingCard = ({ room }) => {
       roomName,
       image,
       date: new Date(date),
+      startTime: startTime?.hour,
+      endTime: endTime?.hour,
+      totalHours: getTotalHours(),
       totalCost: calculateTotalPrice(),
     };
     console.log(bookingData, "Booking data");
