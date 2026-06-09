@@ -9,10 +9,12 @@ import { Button, Card } from "@heroui/react";
 import { FaEdit } from "react-icons/fa";
 import { MdOutlineBookmarkAdd, MdOutlineBookmarks } from "react-icons/md";
 import { authClient } from "@/lib/auth-client";
+import { toast } from "react-toastify";
 
 const BookingCard = ({ room }) => {
   const { data: session } = authClient.useSession();
   const user = session?.user;
+
   console.log(user, "booking card");
 
   console.log(room);
@@ -44,6 +46,10 @@ const BookingCard = ({ room }) => {
 
   //   Confirm Booking
   const handleConfirmBooking = async () => {
+    // if (!user) return;
+    if (!user) {
+      return <p>Loading user...</p>;
+    }
     const bookingData = {
       userId: user.id,
       userImage: user.image,
@@ -56,7 +62,30 @@ const BookingCard = ({ room }) => {
       totalCost: calculateTotalPrice(),
     };
     console.log(bookingData, "Booking data");
+
+    // API call
+    const res = await fetch(`http://localhost:5000/booking`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(bookingData),
+    });
+
+    const data = await res.json();
+    console.log(data);
+    if (data) {
+      toast.success("Room booked successfully !");
+      //   redirect("/");
+    }
+    if (error) {
+      toast.error(error.message || "Booking failed");
+    }
   };
+  //   if (!user) return;
+  if (!user) {
+    return <p>Loading user...</p>;
+  }
 
   return (
     <Card className="rounded-r-lg">
