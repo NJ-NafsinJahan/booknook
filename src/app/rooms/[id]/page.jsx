@@ -7,14 +7,23 @@ import { HiUsers } from "react-icons/hi";
 import { EditModal } from "@/components/EditModal";
 import { DeleteAlert } from "@/components/DeleteAlert";
 import BookingCard from "@/components/BookingCard";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
 const RoomDetailsPage = async ({ params }) => {
   const { id } = await params;
   console.log(id);
 
+  // jwt token cookies
+  const { token } = await auth.api.getToken({
+    headers: await headers(),
+  });
+
+  console.log(token, "token from roomDetailsPg");
+
   const res = await fetch(`http://localhost:5000/room/${id}`, {
     headers: {
-      authorization: "logged in",
+      authorization: `Bearer ${token}`,
     },
   });
   const room = await res.json();
