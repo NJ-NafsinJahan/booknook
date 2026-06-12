@@ -12,7 +12,11 @@ const RoomDetailsPage = async ({ params }) => {
   const { id } = await params;
   console.log(id);
 
-  const res = await fetch(`http://localhost:5000/room/${id}`);
+  const res = await fetch(`http://localhost:5000/room/${id}`, {
+    headers: {
+      authorization: "logged in",
+    },
+  });
   const room = await res.json();
   //   console.log(room, " from Room details page");
 
