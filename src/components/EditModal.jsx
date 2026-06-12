@@ -4,6 +4,8 @@ import { useState } from "react";
 
 import { Button, Modal, Surface } from "@heroui/react";
 import { FaEdit } from "react-icons/fa";
+import { toast } from "react-toastify";
+import { authClient } from "@/lib/auth-client";
 
 export function EditModal({ room }) {
   const [formData, setFormData] = useState({
@@ -50,18 +52,26 @@ export function EditModal({ room }) {
     e.preventDefault();
     console.log(formData, "form DAta");
 
+    // verify api
+    const { data: tokenData } = await authClient.token();
+    // console.log(tokenData);
+
     const res = await fetch(`http://localhost:5000/room/${room?._id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",
+        authorization: `Bearer ${tokenData?.token}`,
       },
       body: JSON.stringify(formData),
     });
 
     const data = await res.json();
     console.log(data, "Updated patch data");
+    toast.success("Room Details Updated!");
 
-    alert("Room Details Updated!");
+    window.location.reload();
+
+    // alert("Room Details Updated!");
   };
 
   return (

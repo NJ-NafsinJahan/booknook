@@ -65,11 +65,16 @@ const BookingCard = ({ room }) => {
     };
     console.log(bookingData, "Booking data");
 
+    // verify api
+    const { data: tokenData } = await authClient.token();
+    console.log(tokenData);
+
     // API call
     const res = await fetch(`http://localhost:5000/booking`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
+        authorization: `Bearer ${tokenData?.token}`,
       },
       body: JSON.stringify(bookingData),
     });
@@ -80,9 +85,9 @@ const BookingCard = ({ room }) => {
       toast.success("Room booked successfully !");
       //   redirect("/");
     }
-    if (error) {
-      toast.error(error.message || "Booking failed");
-    }
+    // if (error) {
+    //   toast.error(error.message || "Booking failed");
+    // }
   };
   //   if (!user) return;
   if (!user) {

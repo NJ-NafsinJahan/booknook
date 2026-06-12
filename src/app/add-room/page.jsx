@@ -1,7 +1,9 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import { redirect } from "next/navigation";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 export default function AddRoomPage() {
   const [room, setRoom] = useState({
@@ -48,19 +50,23 @@ export default function AddRoomPage() {
     e.preventDefault();
     console.log(room);
 
+    // verify api
+    const { data: tokenData } = await authClient.token();
+    // console.log(tokenData);
+
     const res = await fetch("http://localhost:5000/room", {
       method: "POST",
       headers: {
         "content-type": "application/json",
+        authorization: `Bearer ${tokenData?.token}`,
       },
       body: JSON.stringify(room),
     });
 
     const data = await res.json();
+    toast.success("Add Room Successfully");
     redirect("/rooms");
     console.log(data);
-
-    alert("Room submitted!");
   };
 
   return (

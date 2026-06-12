@@ -1,22 +1,30 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import { AlertDialog, Button } from "@heroui/react";
 import { redirect } from "next/navigation";
 import { FaTrashAlt } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 // Delete API
 export function DeleteAlert({ room }) {
   const { _id, roomName } = room;
   const handleDelete = async () => {
+    // verify api
+    const { data: tokenData } = await authClient.token();
+    // console.log(tokenData);
+
     const res = await fetch(`http://localhost:5000/room/${_id}`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",
+        authorization: `Bearer ${tokenData?.token}`,
       },
     });
     const data = await res.json();
+    toast.error("Room is permanently Deleted");
     redirect("/rooms");
-    console.log(data, "from DeleteAlert");
+    // console.log(data, "from DeleteAlert");
   };
   return (
     <AlertDialog>

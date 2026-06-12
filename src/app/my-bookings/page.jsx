@@ -16,7 +16,16 @@ const MyBookingsPage = async () => {
   //   console.log(user, "user data from bookingCard");
   //   console.log(session, "session data from bookingCard");
 
-  const res = await fetch(`http://localhost:5000/booking/${user?.id}`);
+  // jwt token cookies
+  const { token } = await auth.api.getToken({
+    headers: await headers(),
+  });
+
+  const res = await fetch(`http://localhost:5000/booking/${user?.id}`, {
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+  });
   const bookings = await res.json();
   console.log(bookings, "data from booking card");
 

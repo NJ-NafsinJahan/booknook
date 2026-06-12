@@ -23,11 +23,21 @@ const RoomDetailsPage = async ({ params }) => {
 
   const res = await fetch(`http://localhost:5000/room/${id}`, {
     headers: {
-      authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   });
-  const room = await res.json();
+  // const room = await res.json();
   //   console.log(room, " from Room details page");
+  // if (!res.ok) {
+  //   return <div>Error loading room</div>;
+  // }
+
+  const room = await res.json();
+  console.log(room);
+
+  // if (!room) {
+  //   return <div>No data</div>;
+  // }
 
   const {
     _id,
