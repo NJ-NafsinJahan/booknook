@@ -19,7 +19,7 @@ const RoomDetailsPage = async ({ params }) => {
     headers: await headers(),
   });
 
-  console.log(token, "token from roomDetailsPg");
+  // console.log(token, "token from roomDetailsPg");
 
   const res = await fetch(`http://localhost:5000/room/${id}`, {
     headers: {

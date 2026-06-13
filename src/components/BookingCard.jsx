@@ -81,6 +81,21 @@ const BookingCard = ({ room }) => {
 
     const data = await res.json();
     console.log(data);
+
+    // Booking conflict
+
+    if (res.status === 409) {
+      toast.error(data.message || "Time slot already booked");
+      return;
+    }
+
+    if (!res.ok) {
+      toast.error(data.message || "Booking failed");
+      return;
+    }
+
+    // ***********
+
     if (data) {
       toast.success("Room booked successfully !");
       //   redirect("/");
