@@ -8,7 +8,17 @@ import { toast } from "react-toastify";
 
 // Delete API
 export function DeleteAlert({ room }) {
-  const { _id, roomName } = room;
+  const { _id, roomName, email: roomOwnerEmail } = room; //1st change
+
+  // **** for owner checking
+  const { data: session } = authClient.useSession();
+  const currentUserEmail = session?.user?.email;
+
+  if (!currentUserEmail || currentUserEmail !== roomOwnerEmail) {
+    return null;
+  }
+  // ****
+
   const handleDelete = async () => {
     // verify api
     const { data: tokenData } = await authClient.token();

@@ -4,6 +4,7 @@ import { headers } from "next/headers";
 import { Button, Separator } from "@heroui/react";
 import Image from "next/image";
 import RoomCard from "@/components/RoomCard";
+import Link from "next/link";
 
 const MyListingsPage = async () => {
   const session = await auth.api.getSession({
@@ -53,7 +54,7 @@ const MyListingsPage = async () => {
             Looks like you haven't added any room.
           </p>
 
-          <Link href="/rooms">
+          <Link href="/add-room">
             <Button className="bg-fuchsia-600 hover:bg-fuchsia-700 text-white font-medium px-6 py-2 rounded-lg transition">
               Add Rooms
             </Button>

@@ -103,7 +103,7 @@ const RegisterPage = () => {
             {/* Password */}
             <TextField
               isRequired
-              minLength={8}
+              minLength={6}
               name="password"
               type="password"
               validate={(value) => {

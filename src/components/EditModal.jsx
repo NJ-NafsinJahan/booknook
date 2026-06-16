@@ -17,7 +17,22 @@ export function EditModal({ room }) {
     capacity: room?.capacity || "",
     hourlyRate: room?.hourlyRate || "",
     amenities: room?.amenities || [],
+    email: room?.email,
   });
+
+  // **** for owner checking
+  // const { data: session } = authClient.useSession();
+  // const currentUserEmail = session?.user?.email;
+  // console.log(currentUserEmail,"from editModal")
+
+  const { data: session } = authClient.useSession();
+  const currentUserEmail = session?.user?.email;
+  const roomOwnerEmail = room?.email;
+
+  if (!currentUserEmail || currentUserEmail !== roomOwnerEmail) {
+    return null;
+  }
+  // ****
 
   const amenitiesList = [
     "Whiteboard",
