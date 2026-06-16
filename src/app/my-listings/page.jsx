@@ -28,12 +28,15 @@ const MyListingsPage = async () => {
     headers: await headers(),
   });
 
-  const res = await fetch(`http://localhost:5000/room?email=${user.email}`, {
-    headers: {
-      authorization: `Bearer ${token}`,
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/room?email=${user.email}`,
+    {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+      cache: "no-store",
     },
-    cache: "no-store",
-  });
+  );
 
   const listings = await res.json();
   console.log(listings, "from my-listings");

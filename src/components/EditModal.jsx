@@ -71,14 +71,17 @@ export function EditModal({ room }) {
     const { data: tokenData } = await authClient.token();
     // console.log(tokenData);
 
-    const res = await fetch(`http://localhost:5000/room/${room?._id}`, {
-      method: "PATCH",
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${tokenData?.token}`,
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/room/${room?._id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${tokenData?.token}`,
+        },
+        body: JSON.stringify(formData),
       },
-      body: JSON.stringify(formData),
-    });
+    );
 
     const data = await res.json();
     console.log(data, "Updated patch data");

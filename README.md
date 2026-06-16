@@ -54,5 +54,5 @@ Built with Tailwind CSS ensuring a clean, fast, and mobile-friendly user experie
 ## 🔗 Live Link
 
 ```
-https://qurbani-hat-swart.vercel.app/
+https://booknook-beta.vercel.app
 ```

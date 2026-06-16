@@ -12,7 +12,7 @@ const RoomPage = () => {
   const fetchRooms = async () => {
     try {
       const amenitiesQuery = selectedAmenities.join(",");
-      const url = `http://localhost:5000/room?search=${searchText}&amenities=${amenitiesQuery}`;
+      const url = `${process.env.NEXT_PUBLIC_SERVER_URL}/room?search=${searchText}&amenities=${amenitiesQuery}`;
 
       const res = await fetch(url);
       const data = await res.json();

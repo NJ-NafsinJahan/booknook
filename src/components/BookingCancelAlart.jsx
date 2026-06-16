@@ -16,13 +16,16 @@ export function BookingCancelAlert({ booking }) {
     const { data: tokenData } = await authClient.token();
     // console.log(tokenData);
 
-    const res = await fetch(`http://localhost:5000/booking/${_id}`, {
-      method: "DELETE",
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${tokenData?.token}`,
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/booking/${_id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${tokenData?.token}`,
+        },
       },
-    });
+    );
     const data = await res.json();
     console.log(data, "from Booking Cancel Alert");
 

@@ -21,7 +21,7 @@ const RoomDetailsPage = async ({ params }) => {
 
   // console.log(token, "token from roomDetailsPg");
 
-  const res = await fetch(`http://localhost:5000/room/${id}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/room/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

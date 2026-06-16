@@ -3,9 +3,10 @@
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
 import React, { useState } from "react";
-import { FaDoorOpen } from "react-icons/fa6";
+import { FaArrowRightFromBracket, FaDoorOpen } from "react-icons/fa6";
 import { FiMenu, FiX } from "react-icons/fi";
 import { Avatar, Button } from "@heroui/react";
+import { Dropdown, Label } from "@heroui/react";
 
 const Navbar = () => {
   const { data: session } = authClient.useSession();
@@ -44,28 +45,51 @@ const Navbar = () => {
         {user ? (
           <>
             <li>
-              <Link href="/">Home</Link>
+              <Link href="/" className="hover:text-fuchsia-500 transition">
+                Home
+              </Link>
             </li>
             <li>
-              <Link href="/rooms">Rooms</Link>
+              <Link href="/rooms" className="hover:text-fuchsia-500 transition">
+                Rooms
+              </Link>
             </li>
             <li>
-              <Link href="/my-bookings">My Bookings</Link>
+              <Link
+                href="/my-bookings"
+                className="hover:text-fuchsia-500 transition"
+              >
+                My Bookings
+              </Link>
             </li>
             <li>
-              <Link href="/add-room">Add Room</Link>
+              <Link
+                href="/add-room"
+                className="hover:text-fuchsia-500 transition"
+              >
+                Add Room
+              </Link>
             </li>
             <li>
-              <Link href="/my-listings">My Listings</Link>
+              <Link
+                href="/my-listings"
+                className="hover:text-fuchsia-500 transition"
+              >
+                My Listings
+              </Link>
             </li>
           </>
         ) : (
           <>
             <li>
-              <Link href="/">Home</Link>
+              <Link href="/" className="hover:text-fuchsia-500 transition">
+                Home
+              </Link>
             </li>
             <li>
-              <Link href="/rooms">Rooms</Link>
+              <Link href="/rooms" className="hover:text-fuchsia-500 transition">
+                Rooms
+              </Link>
             </li>
           </>
         )}
@@ -78,25 +102,57 @@ const Navbar = () => {
         </li> */}
 
         {user ? (
-          <>
-            <li>
+          // profile dropdown
+          <Dropdown>
+            <Dropdown.Trigger className="rounded-full">
               <Avatar>
-                <Avatar.Image
-                  referrerPolicy="no-referrer"
-                  alt="John Doe"
-                  src={user?.image}
-                />
-                <Avatar.Fallback>{user.name.charAt(0)}</Avatar.Fallback>
+                <Avatar.Image alt="Junior Garcia" src={user?.image} />
+                <Avatar.Fallback delayMs={600}>JD</Avatar.Fallback>
               </Avatar>
-              <Link href="/profile">Profile</Link>
-            </li>
-            <li>
-              <Button onClick={handleSignOut} variant="danger">
-                {" "}
-                LogOut
-              </Button>
-            </li>
-          </>
+            </Dropdown.Trigger>
+            <Dropdown.Popover>
+              <div className="px-3 pt-3 pb-1">
+                <div className="flex items-center gap-2">
+                  <Avatar size="sm">
+                    <Avatar.Image alt={user?.name} src={user?.image} />
+                    <Avatar.Fallback delayMs={600}>JD</Avatar.Fallback>
+                  </Avatar>
+                  <div className="flex flex-col gap-0">
+                    <p className="text-sm leading-5 font-medium">
+                      {user?.name}
+                    </p>
+                    <p className="text-xs leading-none text-muted">
+                      {user?.email}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              {/*  */}
+              <Dropdown.Menu aria-label="User Actions">
+                <Dropdown.Item key="my-bookings" textValue="My Bookings">
+                  <Link href="/my-bookings" className="w-full block">
+                    <Label>My Bookings</Label>
+                  </Link>
+                </Dropdown.Item>
+
+                <Dropdown.Item key="my-listings" textValue="My Listings">
+                  <Link href="/my-listings" className="w-full block">
+                    <Label>My Listings</Label>
+                  </Link>
+                </Dropdown.Item>
+
+                <Dropdown.Item key="logout" textValue="Logout" variant="danger">
+                  <div
+                    onClick={handleSignOut}
+                    className="flex w-full items-center justify-between gap-2"
+                  >
+                    <Label>Log Out</Label>
+                    <FaArrowRightFromBracket className="size-3.5 text-danger" />
+                  </div>
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown.Popover>
+          </Dropdown>
         ) : (
           <>
             <li>
