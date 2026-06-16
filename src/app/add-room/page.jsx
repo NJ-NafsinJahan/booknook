@@ -6,6 +6,13 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 
 export default function AddRoomPage() {
+  // *********
+  const { data: session } = authClient.useSession();
+  const user = session?.user;
+  console.log(user, "from add-room");
+  console.log(user?.email, "from add-room");
+
+  // ********
   const [room, setRoom] = useState({
     roomName: "",
     description: "",
@@ -30,6 +37,13 @@ export default function AddRoomPage() {
     const { name, value } = e.target;
     setRoom({ ...room, [name]: value });
   };
+
+  // ******
+  const finalRoomData = {
+    ...room,
+    email: user?.email,
+  };
+  // ******
 
   // checkbox change
   const handleAmenityChange = (amenity) => {
@@ -60,7 +74,7 @@ export default function AddRoomPage() {
         "content-type": "application/json",
         authorization: `Bearer ${tokenData?.token}`,
       },
-      body: JSON.stringify(room),
+      body: JSON.stringify(finalRoomData), //******create my-listing */
     });
 
     const data = await res.json();
